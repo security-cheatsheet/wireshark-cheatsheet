@@ -136,6 +136,140 @@ Lists packages that have a target mac address.
 wlan.da == MAC-Address
 ```
 
+Filter traffic by IP, be it SOURCE or DESTINATION
+
+```
+ip.addr == IP-ADDR
+```
+
+Filter traffic by SOURCE IP Address
+
+```
+ip.src == IP-ADDR
+```
+
+Filter traffic by DESTINATION IP Address
+
+```
+ip.dst == IP-ADDR
+```
+
+Filter traffic by IP subnet
+
+```
+ip.addr == 127.0.0.1/24
+```
+
+Filter traffic by protocol name
+
+```
+arp
+icmp
+ftp
+ssh
+telnet
+dns
+http
+```
+
+Exclude IP address: remove traffic from and to IP address
+
+```
+!ip.addr ==192.168.0.1
+```
+
+Display traffic between two specific subnet
+
+```
+ip.addr == 192.168.0.1/24 and ip.addr == 192.168.1.1/24
+```
+
+Display traffic between two specific workstations
+
+```
+ip.addr == 192.168.0.1 and ip.addr == 192.168.0.2
+```
+
+Filter by MAC
+
+```
+eth.addr = 00:50:7f:c5:b6:78
+```
+
+Filter TCP port
+
+```
+tcp.port == 80
+```
+
+Filter TCP port source
+
+```
+tcp.srcport == 80
+```
+
+Filter TCP port destination
+
+```
+tcp.dstport == 80
+```
+
+Find user agents
+
+```
+http.user_agent contains Firefox
+!http.user_agent contains || !http.user_agent contains Chrome
+```
+
+Filter broadcast traffic
+
+```
+!(arp or icmp or dns)
+```
+
+Filter IP address and port
+
+```
+tcp.port == 80 && ip.addr == 192.168.0.1
+```
+
+Filter all http get requests
+
+```
+http.request
+```
+
+Filter all http get requests and responses
+
+```
+http.request or http.response
+```
+
+Filter three way handshake
+
+```
+tcp.flags.syn==1 or (tcp.seq==1 and tcp.ack==1 and tcp.len==0 and tcp.analysis.initial_rtt)
+```
+
+Find files by type
+
+```
+frame contains “(attachment|tar|exe|zip|pdf)”
+```
+
+Find traffic based on keyword
+
+```
+tcp contains KEYWORD
+frame contains KEYWORD
+```
+
+Detecting SYN Floods
+
+```
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+```
+
 <b> Cloning an Existing Repository ( Clone with HTTPS ) </b>
 ```
 root@ismailtasdelen:~# git clone https://github.com/ismailtasdelen/wireshark-cheatsheet.git
